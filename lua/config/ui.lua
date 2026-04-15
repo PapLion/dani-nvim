@@ -2,7 +2,14 @@ local M = {}
 local c = require("config.palette").colors
 
 function M.which_key()
-  return {}
+  return {
+    win = {
+      border = "single",
+    },
+    layout = {
+      align = "center",
+    },
+  }
 end
 
 function M.telescope()
@@ -13,21 +20,36 @@ function M.telescope()
       layout_strategy = "horizontal",
       layout_config = {
         prompt_position = "top",
+        width = 0.95,
+        height = 0.85,
       },
       sorting_strategy = "ascending",
       scroll_strategy = "limit",
       winblend = 0,
       path_display = { "truncate" },
+      previewer = false,
       file_ignore_patterns = {
         "%.git/",
         "node_modules/",
         ".cache/",
+        "dist/",
+        "build/",
+        "target/",
+        ".venv/",
+        "venv/",
       },
     },
     pickers = {
       find_files = {
         hidden = true,
+        previewer = false,
       },
+      live_grep = { previewer = false },
+      buffers = { previewer = false },
+      oldfiles = { previewer = false },
+      help_tags = { previewer = false },
+      keymaps = { previewer = false },
+      current_buffer_fuzzy_find = { previewer = false },
     },
   })
 end
@@ -148,18 +170,22 @@ function M.alpha()
   dashboard.section.header.val = {
     "DANI NVIM",
     "",
-    "Text-first • VSCode-friendly • Low overhead",
+    "Text-first • fast • low overhead",
   }
 
   dashboard.section.buttons.val = {
-    dashboard.button("e", "New file", "<cmd>ene<cr>"),
-    dashboard.button("f", "Find file", "<cmd>Telescope find_files<cr>"),
-    dashboard.button("r", "Recent file", "<cmd>Telescope oldfiles<cr>"),
-    dashboard.button("g", "Search text", "<cmd>Telescope live_grep<cr>"),
+    dashboard.button("e", "Explorer", "<cmd>lua require('config.search').explorer()<cr>"),
+    dashboard.button("f", "Find file", "<cmd>lua require('config.search').files()<cr>"),
+    dashboard.button("d", "Find dir", "<cmd>lua require('config.search').dirs()<cr>"),
+    dashboard.button("r", "Recent file", "<cmd>lua require('config.search').recent()<cr>"),
+    dashboard.button("g", "Search text", "<cmd>lua require('config.search').grep()<cr>"),
+    dashboard.button("b", "Buffers", "<cmd>lua require('config.search').buffers()<cr>"),
+    dashboard.button("m", "Mason", "<cmd>Mason<cr>"),
+    dashboard.button("u", "Lazy update", "<cmd>Lazy update<cr>"),
     dashboard.button("q", "Quit", "<cmd>qa<cr>"),
   }
 
-  dashboard.section.footer.val = "Tab accepts Copilot • Space shows commands"
+  dashboard.section.footer.val = "Space shows commands • Tab accepts Copilot • fd finds dirs"
 
   return dashboard
 end

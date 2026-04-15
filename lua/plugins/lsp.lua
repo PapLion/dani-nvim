@@ -45,11 +45,15 @@ return {
     dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
   },
   {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").setup(opts)
     end,
     opts = {
       ensure_installed = {

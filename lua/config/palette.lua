@@ -61,14 +61,33 @@ function M.apply()
   hl("DiagnosticVirtualTextInfo", { fg = c.blue, bg = c.bg_alt })
   hl("DiagnosticVirtualTextHint", { fg = c.cyan, bg = c.bg_alt })
   hl("LspInlayHint", { fg = c.muted, bg = c.bg_alt })
+  hl("Directory", { fg = c.blue, bold = true })
+  hl("Title", { fg = c.cyan, bold = true })
 
   hl("TelescopeBorder", { fg = c.blue, bg = c.bg_alt })
   hl("TelescopeNormal", { fg = c.fg, bg = c.bg_alt })
   hl("TelescopePromptBorder", { fg = c.cyan, bg = c.bg_alt })
   hl("TelescopePromptNormal", { fg = c.fg, bg = c.bg_alt })
   hl("TelescopePromptPrefix", { fg = c.cyan, bg = c.bg_alt, bold = true })
+  hl("TelescopePromptTitle", { fg = c.bg, bg = c.cyan, bold = true })
+  hl("TelescopeResultsBorder", { fg = c.blue, bg = c.bg_alt })
+  hl("TelescopeResultsTitle", { fg = c.bg, bg = c.blue, bold = true })
+  hl("TelescopePreviewBorder", { fg = c.yellow, bg = c.bg_alt })
+  hl("TelescopePreviewTitle", { fg = c.bg, bg = c.yellow, bold = true })
+  hl("TelescopeSelectionCaret", { fg = c.cyan, bg = c.panel, bold = true })
   hl("TelescopeSelection", { fg = c.fg, bg = c.panel })
   hl("TelescopeMatching", { fg = c.yellow, bold = true })
+
+  hl("WhichKey", { fg = c.fg })
+  hl("WhichKeyBorder", { fg = c.blue, bg = c.bg_alt })
+  hl("WhichKeyGroup", { fg = c.cyan, bold = true })
+  hl("WhichKeyDesc", { fg = c.fg })
+  hl("WhichKeySeparator", { fg = c.muted })
+
+  hl("AlphaHeader", { fg = c.cyan, bold = true })
+  hl("AlphaButtons", { fg = c.fg })
+  hl("AlphaFooter", { fg = c.muted })
+  hl("AlphaShortcut", { fg = c.blue, bold = true })
 
   hl("BufferLineFill", { bg = c.bg })
   hl("BufferLineBackground", { fg = c.muted, bg = c.bg_alt })
@@ -86,10 +105,17 @@ function M.apply()
   hl("NvimTreeOpenedFolderName", { fg = c.blue, bold = true })
   hl("NvimTreeIndentMarker", { fg = c.muted })
   hl("NvimTreeSymlink", { fg = c.yellow })
+  hl("NvimTreeFolderIcon", { fg = c.blue })
 
   hl("GitSignsAdd", { fg = c.green })
   hl("GitSignsChange", { fg = c.yellow })
   hl("GitSignsDelete", { fg = c.red })
+
+  hl("OilDir", { fg = c.cyan, bold = true })
+  hl("OilFile", { fg = c.fg })
+  hl("OilHidden", { fg = c.muted })
+  hl("OilIcon", { fg = c.blue })
+  hl("OilHeading", { fg = c.blue, bold = true })
 
   hl("StatusLine", { fg = c.fg, bg = c.bg_alt })
   hl("StatusLineNC", { fg = c.muted, bg = c.bg })
@@ -136,4 +162,3 @@ function M.lualine_theme()
 end
 
 return M
-

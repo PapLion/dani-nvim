@@ -14,6 +14,15 @@ Starter de Neovim pensado para:
 2. Espera a que `lazy.nvim` descargue los plugins.
 3. Ejecuta `:Copilot setup` una sola vez y autentícate.
 
+## Uso diario
+
+1. `Space e` abre el explorador de archivos.
+2. `Space ff` busca archivos.
+3. `Space fd` busca directorios.
+4. `Space fg` busca texto en todo el proyecto.
+5. `Space fb` muestra buffers abiertos.
+6. `Space tt` abre la terminal flotante.
+
 ## Atajos base
 
 | Tecla | Acción |
@@ -23,6 +32,7 @@ Starter de Neovim pensado para:
 | `Ctrl+P` | Buscar archivo |
 | `Space e` | Explorador de archivos |
 | `Space ff` | Buscar archivo |
+| `Space fd` | Buscar directorio |
 | `Space fg` | Buscar texto |
 | `Space fr` | Archivos recientes |
 | `Space fb` | Buffers |
@@ -44,10 +54,15 @@ Starter de Neovim pensado para:
 
 Mason instala LSPs para Lua, Python, Bash, JSON, YAML, HTML, CSS, TypeScript, C/C++, Go, Rust, Java y Kotlin.
 
+## Actualizaciones
+
+- `:Lazy update` actualiza los plugins.
+- `:Mason` abre el gestor de LSPs y herramientas.
+- Cierra y vuelve a abrir Neovim después de una actualización grande para que cargue todo limpio.
+
 ## Notas
 
 - El tema es propio: `dani`.
 - `:Lazy` abre el gestor de plugins.
 - `:Mason` muestra herramientas/LSPs.
 - `:checkhealth` sirve para diagnosticar problemas.
-

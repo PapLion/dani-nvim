@@ -66,6 +66,20 @@ return {
     opts = require("config.ui").nvim_tree(),
   },
   {
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    config = function(_, opts)
+      require("oil").setup(opts)
+    end,
+    opts = {
+      default_file_explorer = true,
+      view_options = {
+        show_hidden = true,
+      },
+      columns = { "permissions", "size", "mtime" },
+    },
+  },
+  {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = { "nvim-lua/plenary.nvim" },
