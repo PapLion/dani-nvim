@@ -1,4 +1,6 @@
 local group = vim.api.nvim_create_augroup("DaniNeovim", { clear = true })
+local community = require("community")
+local uv = vim.uv or vim.loop
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = group,
@@ -22,9 +24,35 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = group,
+  desc = "Root to git repository",
+  callback = function(args)
+    local name = vim.api.nvim_buf_get_name(args.buf)
+    if name == "" then
+      return
+    end
+    local stat = uv.fs_stat(name)
+    if not stat or stat.type ~= "file" then
+      return
+    end
+    community.set_project_cwd(args.buf)
+  end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
-  pattern = { "help", "man", "qf", "checkhealth", "lspinfo", "alpha" },
+  pattern = {
+    "help",
+    "man",
+    "qf",
+    "checkhealth",
+    "lspinfo",
+    "alpha",
+    "neo-tree",
+    "snacks_dashboard",
+    "Trouble",
+  },
   desc = "Close helper windows with q",
   callback = function(event)
     vim.keymap.set("n", "q", "<cmd>quit<cr>", {

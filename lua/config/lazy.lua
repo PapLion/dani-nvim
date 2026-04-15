@@ -18,10 +18,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = { { import = "plugins" } },
-  defaults = { lazy = true },
+  spec = {
+    { import = "plugins" },
+  },
+  defaults = {
+    lazy = true,
+    version = false,
+  },
   install = {
-    colorscheme = { "dani" },
+    colorscheme = { "habamax" },
   },
   checker = {
     enabled = true,
@@ -46,3 +51,4 @@ require("lazy").setup({
   },
 })
 
+require("polish").setup()

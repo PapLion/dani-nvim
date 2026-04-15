@@ -8,6 +8,7 @@ opt.writebackup = false
 opt.clipboard = "unnamedplus"
 opt.confirm = true
 opt.cursorline = true
+opt.cursorlineopt = "number"
 opt.expandtab = true
 opt.fillchars = { eob = " " }
 opt.hlsearch = true
@@ -28,20 +29,21 @@ opt.shiftround = true
 opt.shiftwidth = 2
 opt.shortmess:append("c")
 opt.showmode = false
+opt.showtabline = 2
 opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.splitbelow = true
+opt.splitkeep = "screen"
 opt.splitright = true
-opt.swapfile = true
+opt.swapfile = false
 opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
 opt.updatetime = 200
-opt.winblend = 0
 opt.winborder = "single"
 opt.wrap = false
-opt.showtabline = 2
 opt.tabstop = 2
 opt.softtabstop = 2
 opt.colorcolumn = "100"
+opt.shortmess:append("sI")

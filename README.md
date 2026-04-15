@@ -1,99 +1,84 @@
 # Dani Nvim
 
-Starter de Neovim minimalista, rápido y beginner-friendly para Arch Linux.
+Neovim starter text-first para Arch Linux, pensado para ser rápido, beginner-friendly y estable en hardware modesto. Usa la paleta real del sistema, no depende de Nerd Fonts y prioriza flujos simples que no rompan el editor.
 
-Pensado para:
+## Incluye
 
-- sentirse cercano a VSCode
-- ser liviano en una laptop de 4 GB RAM
-- seguir la paleta del resto del sistema
-- no depender de Nerd Fonts ni de iconos rotos
-- incluir Copilot desde el inicio
-
-## Qué incluye
-
-- `lazy.nvim` como gestor de plugins
-- Copilot listo para usarse
-- `Telescope` con file browser para carpetas, buffers, recientes y ayuda
-- `Mason` + LSP + `Treesitter`
-- `Trouble`, `persistence`, `diffview` y `fugitive`
-- `bufferline`, `lualine`, `which-key`, `dressing`, `toggleterm`
-- tema propio: `dani`
+- `lazy.nvim` como gestor
+- `snacks.nvim` para dashboard y notificaciones
+- `neo-tree`, `telescope`, `which-key`
+- `blink.cmp`, `mason.nvim`, `nvim-lspconfig`, `conform.nvim`, `nvim-lint`
+- `gitsigns`, `lazygit.nvim`, `diffview.nvim`
+- `nvim-treesitter`, `toggleterm.nvim`, `todo-comments.nvim`, `trouble.nvim`
+- tema custom `dani` basado en la paleta de i3
 
 ## Primer arranque
 
-1. Abre `nvim`.
-2. Espera a que `lazy.nvim` descargue los plugins.
-3. Ejecuta `:Copilot setup` una sola vez y autentícate.
+1. Clona el repo en `~/.config/nvim`.
+2. Abre `nvim`.
+3. Deja que `lazy.nvim` instale todo.
+4. Si hace falta, revisa `:Mason` para los servidores/formateadores.
 
-## Instalación desde GitHub
-
-```bash
-gh repo clone PapLion/dani-nvim ~/.config/nvim
-```
-
-Luego abre `nvim` y deja que `lazy.nvim` termine de instalar todo.
-
-## Uso diario
-
-1. `Space e` abre el explorador de archivos.
-2. `Space fd` abre carpetas.
-3. `Space fr` muestra archivos recientes.
-4. `Space fb` muestra buffers abiertos.
-5. `Space gs` abre el estado de Git.
-6. `Space tt` abre la terminal flotante.
-
-## Atajos base
+## Navegación diaria
 
 | Tecla | Acción |
 | --- | --- |
-| `Space` | Leader / menú de atajos |
-| `Ctrl+S` | Guardar |
-| `Space e` | Explorador de archivos |
-| `Space fd` | Abrir carpetas |
-| `Space fr` | Archivos recientes |
+| `Space e` | Toggle explorer |
+| `Space o` | Focus explorer |
+| `Space ff` | Buscar archivos |
+| `Space fg` | Live grep |
 | `Space fb` | Buffers |
-| `Space gs` | Estado de Git |
-| `Space gf` | Archivos Git |
-| `Space gB` | Ramas Git |
-| `Space /` | Buscar dentro del archivo actual |
-| `Space tt` | Terminal flotante |
-| `Space w` | Guardar |
-| `Space q` | Cerrar ventana |
-| `Tab` | Aceptar sugerencia de Copilot |
-| `Ctrl+Space` | Abrir completion |
-| `gd` | Ir a definición |
-| `gr` | Referencias |
-| `gi` | Implementación |
-| `K` | Hover |
-| `Space rn` | Renombrar |
-| `Space ca` | Code action |
-| `Space ld` | Diagnóstico de línea |
+| `Space fr` | Archivos recientes |
+| `Space fp` | Switch de proyectos |
+| `Space gs` | LazyGit |
+| `Space gd` | Diffview |
+| `Space gD` | Close Diffview |
+| `Space gb` | Git blame |
+| `Space gB` | Git branches |
+| `Space gS` | Git status |
 | `Space xx` | Diagnósticos |
 | `Space xw` | Diagnósticos del buffer |
-| `Space xl` | Lista de ubicaciones |
-| `Space xq` | Lista de quickfix |
-| `Space ss` | Guardar sesión |
-| `Space sl` | Restaurar última sesión |
-| `Space sd` | Restaurar sesión del directorio |
+| `Space xl` | Location list |
+| `Space xq` | Quickfix |
+| `Space tt` | Terminal flotante |
+| `Tab` / `Shift+Tab` | Siguiente / anterior buffer |
+| `Ctrl+O` / `Ctrl+I` | Jump back / forward |
+| `Space ch` | Cheatsheet de atajos |
 
-## Lenguajes
+## Uso rápido
 
-Mason instala LSPs para Lua, Python, Bash, JSON, YAML, HTML, CSS, TypeScript, C/C++, Go, Rust, Java y Kotlin.
+- `:Lazy` abre el gestor de plugins.
+- `:Lazy update` actualiza la base.
+- `:Mason` gestiona LSPs y herramientas.
+- `:Neotree toggle` abre el explorador.
+- `:Trouble` abre diagnósticos.
+- `:LazyGit` abre Git.
 
-## Actualizaciones
+## Arquitectura
 
-- `:Lazy update` actualiza los plugins.
-- `:Mason` abre el gestor de LSPs y herramientas.
-- `:Git` abre Fugitive.
-- `:Trouble` abre el panel de diagnósticos.
-- Cierra y vuelve a abrir Neovim después de una actualización grande para que cargue todo limpio.
-- `git pull` actualiza el repo si lo clonaste desde GitHub.
+```text
+~/.config/nvim/
+├── init.lua
+├── lua/
+│   ├── config/
+│   │   ├── lazy.lua
+│   │   ├── options.lua
+│   │   ├── keymaps.lua
+│   │   └── autocmds.lua
+│   ├── plugins/
+│   │   ├── ui.lua
+│   │   ├── editor.lua
+│   │   ├── lsp.lua
+│   │   ├── completion.lua
+│   │   ├── git.lua
+│   │   ├── treesitter.lua
+│   │   └── tools.lua
+│   ├── community.lua
+│   └── polish.lua
+```
 
 ## Notas
 
-- El tema es propio: `dani`.
-- `:Lazy` abre el gestor de plugins.
-- `:Mason` muestra herramientas/LSPs.
-- `:checkhealth` sirve para diagnosticar problemas.
-- `:messages` ayuda a ver errores recientes.
+- El root del proyecto se detecta por `.git`.
+- El tema usa la paleta del sistema y ajustes derivados, no colores aleatorios.
+- Si quieres refrescar el setup completo, ejecuta `:Lazy sync` y reinicia Neovim.
