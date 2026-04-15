@@ -26,16 +26,30 @@ local function builtin()
   return require("telescope.builtin")
 end
 
-local function actions()
-  return require("telescope.actions")
-end
+local function git_root()
+  local git = vim.fs.find(".git", { path = vim.loop.cwd(), upward = true })[1]
+  if not git then
+    vim.notify("Not inside a git repository", vim.log.levels.WARN, { title = "Git search" })
+    return nil
+  end
 
-local function action_state()
-  return require("telescope.actions.state")
+  return vim.fn.fnamemodify(git, ":h")
 end
 
 function M.explorer()
-  vim.cmd("Oil")
+  local path = vim.fn.expand("%:p:h")
+  if path == "" or path == vim.fn.expand("%:p") then
+    path = vim.loop.cwd()
+  end
+
+  require("telescope").extensions.file_browser.file_browser({
+    path = path,
+    cwd_to_path = true,
+    hidden = true,
+    grouped = true,
+    select_buffer = true,
+    prompt_path = true,
+  })
 end
 
 function M.files()
@@ -52,30 +66,13 @@ function M.files()
 end
 
 function M.dirs()
-  builtin().find_files({
-    prompt_title = "Directories",
+  local cwd = vim.loop.cwd()
+  require("telescope").extensions.file_browser.folder_browser({
+    cwd = cwd,
+    cwd_to_path = true,
     hidden = true,
-    previewer = false,
-    find_command = vim.list_extend({
-      "fd",
-      "--type",
-      "d",
-    }, fd_common),
-    attach_mappings = function(prompt_bufnr)
-      local telescope_actions = actions()
-      local telescope_state = action_state()
-
-      telescope_actions.select_default:replace(function()
-        local entry = telescope_state.get_selected_entry()
-        telescope_actions.close(prompt_bufnr)
-
-        if entry and entry.path then
-          vim.cmd("Oil " .. vim.fn.fnameescape(entry.path))
-        end
-      end)
-
-      return true
-    end,
+    grouped = true,
+    prompt_path = true,
   })
 end
 
@@ -119,6 +116,61 @@ function M.buffer_search()
     prompt_title = "Current Buffer",
     previewer = false,
   })
+end
+
+function M.git_files()
+  local cwd = git_root()
+  if not cwd then
+    return
+  end
+
+  builtin().git_files({
+    prompt_title = "Git Files",
+    cwd = cwd,
+    previewer = false,
+  })
+end
+
+function M.git_status()
+  local cwd = git_root()
+  if not cwd then
+    return
+  end
+
+  builtin().git_status({
+    prompt_title = "Git Status",
+    cwd = cwd,
+    previewer = false,
+  })
+end
+
+function M.git_branches()
+  local cwd = git_root()
+  if not cwd then
+    return
+  end
+
+  builtin().git_branches({
+    prompt_title = "Git Branches",
+    cwd = cwd,
+    previewer = false,
+  })
+end
+
+function M.diffview_open()
+  if not git_root() then
+    return
+  end
+
+  vim.cmd("DiffviewOpen")
+end
+
+function M.toggle_blame()
+  if not git_root() then
+    return
+  end
+
+  require("gitsigns").toggle_current_line_blame()
 end
 
 return M

@@ -49,6 +49,30 @@ return {
     end,
   },
   {
+    "folke/trouble.nvim",
+    cmd = { "Trouble", "TroubleToggle", "TroubleFocus" },
+    config = function(_, opts)
+      require("trouble").setup(opts)
+    end,
+    opts = {
+      focus = true,
+      auto_close = false,
+      auto_preview = false,
+      use_diagnostic_signs = true,
+    },
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    config = function(_, opts)
+      require("persistence").setup(opts)
+    end,
+    opts = {
+      dir = vim.fn.stdpath("state") .. "/sessions/",
+      options = { "buffers", "curdir", "tabpages", "winsize", "help" },
+    },
+  },
+  {
     "akinsho/toggleterm.nvim",
     version = "*",
     cmd = "ToggleTerm",
@@ -58,34 +82,21 @@ return {
     opts = require("config.ui").toggleterm(),
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
-    config = function(_, opts)
-      require("nvim-tree").setup(opts)
-    end,
-    opts = require("config.ui").nvim_tree(),
-  },
-  {
-    "stevearc/oil.nvim",
-    cmd = "Oil",
-    config = function(_, opts)
-      require("oil").setup(opts)
-    end,
-    opts = {
-      default_file_explorer = true,
-      view_options = {
-        show_hidden = true,
-      },
-      columns = { "permissions", "size", "mtime" },
-    },
-  },
-  {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("config.ui").telescope()
     end,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
   {
     "goolord/alpha-nvim",
@@ -110,5 +121,17 @@ return {
       require("lualine").setup(opts)
     end,
     opts = require("config.ui").lualine(),
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFileHistory" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function(_, opts)
+      require("diffview").setup(opts)
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit", "Git blame", "GBrowse" },
   },
 }

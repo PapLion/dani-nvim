@@ -51,7 +51,22 @@ function M.telescope()
       keymaps = { previewer = false },
       current_buffer_fuzzy_find = { previewer = false },
     },
+    extensions = {
+      file_browser = {
+        hijack_netrw = true,
+        grouped = true,
+        hidden = true,
+        respect_gitignore = true,
+        prompt_path = true,
+        use_fd = true,
+        git_status = true,
+        dir_icon = "DIR",
+      },
+    },
   })
+
+  pcall(require("telescope").load_extension, "fzf")
+  pcall(require("telescope").load_extension, "file_browser")
 end
 
 function M.nvim_tree()
@@ -130,7 +145,7 @@ function M.lualine()
       section_separators = "",
       component_separators = "",
       disabled_filetypes = {
-        statusline = { "alpha", "NvimTree", "help" },
+        statusline = { "alpha", "help" },
         winbar = {},
       },
     },
@@ -180,12 +195,15 @@ function M.alpha()
     dashboard.button("r", "Recent file", "<cmd>lua require('config.search').recent()<cr>"),
     dashboard.button("g", "Search text", "<cmd>lua require('config.search').grep()<cr>"),
     dashboard.button("b", "Buffers", "<cmd>lua require('config.search').buffers()<cr>"),
+    dashboard.button("s", "Git status", "<cmd>lua require('config.search').git_status()<cr>"),
+    dashboard.button("j", "Restore session", "<cmd>lua require('persistence').load({ last = true })<cr>"),
+    dashboard.button("x", "Diagnostics", "<cmd>Trouble diagnostics toggle<cr>"),
     dashboard.button("m", "Mason", "<cmd>Mason<cr>"),
     dashboard.button("u", "Lazy update", "<cmd>Lazy update<cr>"),
     dashboard.button("q", "Quit", "<cmd>qa<cr>"),
   }
 
-  dashboard.section.footer.val = "Space shows commands • Tab accepts Copilot • fd finds dirs"
+  dashboard.section.footer.val = "Space shows commands • Tab accepts Copilot • Git, sessions, and trouble built in"
 
   return dashboard
 end
