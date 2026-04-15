@@ -40,11 +40,6 @@ function M.telescope()
       },
     },
     pickers = {
-      find_files = {
-        hidden = true,
-        previewer = false,
-      },
-      live_grep = { previewer = false },
       buffers = { previewer = false },
       oldfiles = { previewer = false },
       help_tags = { previewer = false },
@@ -190,10 +185,8 @@ function M.alpha()
 
   dashboard.section.buttons.val = {
     dashboard.button("e", "Explorer", "<cmd>lua require('config.search').explorer()<cr>"),
-    dashboard.button("f", "Find file", "<cmd>lua require('config.search').files()<cr>"),
-    dashboard.button("d", "Find dir", "<cmd>lua require('config.search').dirs()<cr>"),
+    dashboard.button("d", "Folders", "<cmd>lua require('config.search').dirs()<cr>"),
     dashboard.button("r", "Recent file", "<cmd>lua require('config.search').recent()<cr>"),
-    dashboard.button("g", "Search text", "<cmd>lua require('config.search').grep()<cr>"),
     dashboard.button("b", "Buffers", "<cmd>lua require('config.search').buffers()<cr>"),
     dashboard.button("s", "Git status", "<cmd>lua require('config.search').git_status()<cr>"),
     dashboard.button("j", "Restore session", "<cmd>lua require('persistence').load({ last = true })<cr>"),
@@ -203,7 +196,7 @@ function M.alpha()
     dashboard.button("q", "Quit", "<cmd>qa<cr>"),
   }
 
-  dashboard.section.footer.val = "Space shows commands • Tab accepts Copilot • Git, sessions, and trouble built in"
+  dashboard.section.footer.val = "Space shows commands • Tab accepts Copilot • Explorer, git, sessions, and trouble built in"
 
   return dashboard
 end

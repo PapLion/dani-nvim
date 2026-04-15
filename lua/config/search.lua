@@ -1,29 +1,17 @@
 local M = {}
 
-local fd_common = {
-  "fd",
-  "--hidden",
-  "--follow",
-  "--exclude",
-  ".git",
-  "--exclude",
-  "node_modules",
-  "--exclude",
-  ".cache",
-  "--exclude",
-  "dist",
-  "--exclude",
-  "build",
-  "--exclude",
-  "target",
-  "--exclude",
-  ".venv",
-  "--exclude",
-  "venv",
-}
-
 local function builtin()
   return require("telescope.builtin")
+end
+
+local function file_browser(opts)
+  require("telescope").extensions.file_browser.file_browser(vim.tbl_extend("force", {
+    hidden = true,
+    grouped = true,
+    prompt_path = true,
+    use_fd = true,
+    git_status = true,
+  }, opts or {}))
 end
 
 local function git_root()
@@ -42,44 +30,24 @@ function M.explorer()
     path = vim.loop.cwd()
   end
 
-  require("telescope").extensions.file_browser.file_browser({
+  file_browser({
     path = path,
+    cwd = path,
     cwd_to_path = true,
-    hidden = true,
-    grouped = true,
     select_buffer = true,
-    prompt_path = true,
-  })
-end
-
-function M.files()
-  builtin().find_files({
-    prompt_title = "Files",
-    hidden = true,
-    previewer = false,
-    find_command = vim.list_extend({
-      "fd",
-      "--type",
-      "f",
-    }, fd_common),
+    prompt_title = "Explorer",
   })
 end
 
 function M.dirs()
   local cwd = vim.loop.cwd()
-  require("telescope").extensions.file_browser.folder_browser({
+  file_browser({
     cwd = cwd,
+    path = cwd,
     cwd_to_path = true,
-    hidden = true,
-    grouped = true,
-    prompt_path = true,
-  })
-end
-
-function M.grep()
-  builtin().live_grep({
-    prompt_title = "Text",
-    previewer = false,
+    files = false,
+    select_buffer = false,
+    prompt_title = "Folders",
   })
 end
 

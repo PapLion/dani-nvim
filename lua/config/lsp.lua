@@ -55,7 +55,6 @@ function M.setup()
     run_on_start = true,
   })
 
-  local lspconfig = require("lspconfig")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   vim.diagnostic.config({
@@ -70,6 +69,10 @@ function M.setup()
       border = "single",
       source = "if_many",
     },
+  })
+
+  vim.lsp.config("*", {
+    capabilities = capabilities,
   })
 
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -96,9 +99,12 @@ function M.setup()
   })
 
   for name, config in pairs(servers) do
-    config.capabilities = capabilities
-    lspconfig[name].setup(config)
+    vim.lsp.config(name, vim.tbl_deep_extend("force", {}, config, {
+      capabilities = capabilities,
+    }))
   end
+
+  vim.lsp.enable(vim.tbl_keys(servers))
 end
 
 return M

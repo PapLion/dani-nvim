@@ -14,7 +14,7 @@ Pensado para:
 
 - `lazy.nvim` como gestor de plugins
 - Copilot listo para usarse
-- `Telescope` con file browser para archivos, carpetas, texto, buffers y ayuda
+- `Telescope` con file browser para carpetas, buffers, recientes y ayuda
 - `Mason` + LSP + `Treesitter`
 - `Trouble`, `persistence`, `diffview` y `fugitive`
 - `bufferline`, `lualine`, `which-key`, `dressing`, `toggleterm`
@@ -37,12 +37,11 @@ Luego abre `nvim` y deja que `lazy.nvim` termine de instalar todo.
 ## Uso diario
 
 1. `Space e` abre el explorador de archivos.
-2. `Space ff` busca archivos.
-3. `Space fd` busca directorios.
-4. `Space fg` busca texto en todo el proyecto.
-5. `Space fb` muestra buffers abiertos.
-6. `Space gs` abre el estado de Git.
-7. `Space tt` abre la terminal flotante.
+2. `Space fd` abre carpetas.
+3. `Space fr` muestra archivos recientes.
+4. `Space fb` muestra buffers abiertos.
+5. `Space gs` abre el estado de Git.
+6. `Space tt` abre la terminal flotante.
 
 ## Atajos base
 
@@ -50,11 +49,8 @@ Luego abre `nvim` y deja que `lazy.nvim` termine de instalar todo.
 | --- | --- |
 | `Space` | Leader / menú de atajos |
 | `Ctrl+S` | Guardar |
-| `Ctrl+P` | Buscar archivo |
 | `Space e` | Explorador de archivos |
-| `Space ff` | Buscar archivo |
-| `Space fd` | Buscar directorio |
-| `Space fg` | Buscar texto |
+| `Space fd` | Abrir carpetas |
 | `Space fr` | Archivos recientes |
 | `Space fb` | Buffers |
 | `Space gs` | Estado de Git |
