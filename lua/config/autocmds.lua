@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "man", "qf", "checkhealth", "lspinfo", "alpha" },
   desc = "Close helper windows with q",
   callback = function(event)
-    vim.keymap.set("n", "q", "<cmd>close<cr>", {
+    vim.keymap.set("n", "q", "<cmd>quit<cr>", {
       buffer = event.buf,
       silent = true,
       desc = "Close window",
@@ -55,4 +55,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("startinsert")
   end,
 })
-

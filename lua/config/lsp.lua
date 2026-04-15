@@ -34,12 +34,6 @@ local servers = {
 }
 
 function M.setup()
-  require("mason").setup({
-    ui = {
-      border = "single",
-    },
-  })
-
   require("mason-lspconfig").setup({
     ensure_installed = vim.tbl_keys(servers),
     automatic_installation = true,
@@ -108,4 +102,3 @@ function M.setup()
 end
 
 return M
-

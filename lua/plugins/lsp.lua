@@ -26,7 +26,15 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    cmd = "Mason",
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonLog", "MasonUpdate" },
+    opts = {
+      ui = {
+        border = "single",
+      },
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
