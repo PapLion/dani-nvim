@@ -19,6 +19,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "stevearc/conform.nvim",
     },
     config = function()
       require("config.completion").setup()

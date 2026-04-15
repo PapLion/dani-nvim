@@ -1,6 +1,8 @@
 # Dani Nvim
 
-Starter de Neovim pensado para:
+Starter de Neovim minimalista, rápido y beginner-friendly para Arch Linux.
+
+Pensado para:
 
 - sentirse cercano a VSCode
 - ser liviano en una laptop de 4 GB RAM
@@ -8,11 +10,29 @@ Starter de Neovim pensado para:
 - no depender de Nerd Fonts
 - incluir Copilot desde el inicio
 
+## Qué incluye
+
+- `lazy.nvim` como gestor de plugins
+- Copilot listo para usarse
+- `Oil` para explorar directorios estilo ranger
+- `Telescope` para archivos, texto, buffers y ayuda
+- `Mason` + LSP + `Treesitter`
+- `bufferline`, `lualine`, `which-key`, `dressing`, `toggleterm`
+- tema propio: `dani`
+
 ## Primer arranque
 
 1. Abre `nvim`.
 2. Espera a que `lazy.nvim` descargue los plugins.
 3. Ejecuta `:Copilot setup` una sola vez y autentícate.
+
+## Instalación desde GitHub
+
+```bash
+gh repo clone PapLion/dani-nvim ~/.config/nvim
+```
+
+Luego abre `nvim` y deja que `lazy.nvim` termine de instalar todo.
 
 ## Uso diario
 
@@ -59,6 +79,7 @@ Mason instala LSPs para Lua, Python, Bash, JSON, YAML, HTML, CSS, TypeScript, C/
 - `:Lazy update` actualiza los plugins.
 - `:Mason` abre el gestor de LSPs y herramientas.
 - Cierra y vuelve a abrir Neovim después de una actualización grande para que cargue todo limpio.
+- `git pull` actualiza el repo si lo clonaste desde GitHub.
 
 ## Notas
 
@@ -66,3 +87,4 @@ Mason instala LSPs para Lua, Python, Bash, JSON, YAML, HTML, CSS, TypeScript, C/
 - `:Lazy` abre el gestor de plugins.
 - `:Mason` muestra herramientas/LSPs.
 - `:checkhealth` sirve para diagnosticar problemas.
+- `:messages` ayuda a ver errores recientes.
